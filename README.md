@@ -170,7 +170,7 @@ docker run -p 8081:8081 \
 
 ## 📂 Project Structure
 
-The project follows a **Domain-Driven Design (DDD)** architecture. Each feature (User, Group, Expense) is a self-contained module with its own API, Service, and Repository layers.
+The project follows a **modular monolith (MM)** architecture. Each feature (User, Group, Expense) is a self-contained module with its own API, Service, and Repository layers.
 
 ```bash
 com.grouppay
