@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: GroupPay-Manage-group-expenses-and-settle-balances-effortlessly
+
+  # ===================== DATABASE =====================
+  datasource:
+    url: jdbc:mysql://localhost:3306/grouppay
+    username: root
+    password: 9873
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update        # dev ke liye update, prod me validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # ===================== REDIS =====================
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000
+
+  # ===================== KAFKA =====================
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: grouppay-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+  # ===================== OAUTH2 (Placeholder) =====================
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "placeholder-client-id"
+            client-secret: "placeholder-secret"
+            scope: profile, email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: Google
+
+# ===================== SERVER =====================
+server:
+  port: 8081
+  address: 0.0.0.0
+
+# ===================== JWT =====================
+jwt:
+  secret: V8YFhA2xZqK3Q7nYpLZ3Y8Z0FZl5pP0yRkzP8L9R2JwAWP11910-w1-2121-1121nn23==
+
+
+
+# ===================== LOGGING =====================
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# ===================== ACTUATOR =====================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

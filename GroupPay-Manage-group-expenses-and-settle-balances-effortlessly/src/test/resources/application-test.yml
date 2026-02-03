@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  
+  # Mock Redis and Kafka by disabling their auto-configuration or handling via test slices
+  # However, Spring Boot will still try to connect if starters are present.
+  # We can effectively disable them by properties or MockBeans in the test class.
+  # For now, let's point them to something that won't block startup or assume we Mock them.
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379 # Hopefully won't connect unless used. If it fails, I'll use @MockBean.
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: mock-id
+            client-secret: mock-secret
+
+logging:
+  level:
+    root: INFO
