@@ -1,6 +1,6 @@
 <div align="center">
   <!-- You can replace this placeholder with a real logo if you have one -->
-  <h1>💸 GroupPay</h1>
+  <h1>💸 GroupPay Backend</h1>
   
   <p>
     <strong>Advanced Expense Splitting & Settlement Engine</strong>
@@ -87,6 +87,37 @@
 
 ---
 
+## 🧠 The Algorithm: Minimum Cash Flow
+
+GroupPay isn't just a CRUD app; it solves the NP-hard problem of **debt simplification** efficiently using a **Greedy Minimum Cash Flow Algorithm**.
+
+### The Problem
+Imagine 3 friends: **Alice**, **Bob**, and **Charlie**.
+1.  **Alice** pays **$50** for Bob.
+2.  **Bob** pays **$50** for Charlie.
+
+**Naive Approach (2 Transactions):**
+*   Bob gives Alice $50.
+*   Charlie gives Bob $50.
+*   *Bob is just a middleman moving money!*
+
+### The Solution (1 Transaction) ⚡
+Our algorithm calculates the **Net Balance** for each person:
+*   Alice: **+$50** (She is owed)
+*   Bob: **0** (Owes 50, Owed 50 -> Net 0)
+*   Charlie: **-$50** (He owes)
+
+**Optimized Result:**
+*   **Charlie pays Alice $50 directly.**
+*   Bob does nothing.
+
+### Why this is better?
+Drastically reduces bank transfers in large groups.
+*   **Input**: N people with M transactions.
+*   **Output**: At most N-1 transactions to settle EVERYONE.
+
+---
+
 ## 📚 API Documentation
 
 Explore the API interactively. No external tools needed.
@@ -158,6 +189,6 @@ graph TD;
 
 <div align="center">
   <p>
-    <sub>Developed with ❤️ by <a href="https://github.com/Mahir-Agarwal">Mahir Aggarwal</a></sub>
+    <sub> Engineered and Developed by <a href="https://github.com/Mahir-Agarwal">Mahir Aggarwal</a></sub>
   </p>
 </div>
