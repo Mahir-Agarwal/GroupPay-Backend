@@ -1,6 +1,6 @@
 <div align="center">
   <!-- You can replace this placeholder with a real logo if you have one -->
-  <h1>💸 GroupPay Backend</h1>
+  <h1>💸 GroupPay</h1>
   
   <p>
     <strong>Advanced Expense Splitting & Settlement Engine</strong>
