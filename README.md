@@ -92,24 +92,24 @@
 GroupPay isn't just a CRUD app; it solves the NP-hard problem of **debt simplification** efficiently using a **Greedy Minimum Cash Flow Algorithm**.
 
 ### The Problem
-Imagine 3 friends: **Alice**, **Bob**, and **Charlie**.
-1.  **Alice** pays **$50** for Bob.
-2.  **Bob** pays **$50** for Charlie.
+Imagine 3 friends: **Ram**, **Sham**, and **Krishna**.
+1.  **Ram** pays **₹50** for Sham.
+2.  **Sham** pays **₹50** for Krishna.
 
 **Naive Approach (2 Transactions):**
-*   Bob gives Alice $50.
-*   Charlie gives Bob $50.
-*   *Bob is just a middleman moving money!*
+*   Sham gives Ram ₹50.
+*   Krishna gives Sham ₹50.
+*   *Sham is just a middleman moving money!*
 
 ### The Solution (1 Transaction) ⚡
 Our algorithm calculates the **Net Balance** for each person:
-*   Alice: **+$50** (She is owed)
-*   Bob: **0** (Owes 50, Owed 50 -> Net 0)
-*   Charlie: **-$50** (He owes)
+*   Ram: **+₹50** (He is owed)
+*   Sham: **0** (Owes 50, Owed 50 -> Net 0)
+*   Krishna: **-₹50** (He owes)
 
 **Optimized Result:**
-*   **Charlie pays Alice $50 directly.**
-*   Bob does nothing.
+*   **Krishna pays Ram ₹50 directly.**
+*   Sham does nothing.
 
 ### Why this is better?
 Drastically reduces bank transfers in large groups.
@@ -168,22 +168,31 @@ docker run -p 8081:8081 \
 
 ---
 
-## 📂 Architecture
+## 📂 Project Structure
 
-The project adheres to **Domain-Driven Design (DDD)** principles to separate concerns cleanly.
+The project follows a **Domain-Driven Design (DDD)** architecture. Each feature (User, Group, Expense) is a self-contained module with its own API, Service, and Repository layers.
 
-```mermaid
-graph TD;
-    A[API Layer / Controller] --> B[Service Layer];
-    B --> C[Repository Layer];
-    B --> D[Domain Entities];
-    C --> E[(MySQL / TiDB)];
+```bash
+com.grouppay
+├── 👤 user
+│   ├── api            # AuthController (Login, Register, ForgotPwd)
+│   ├── application    # PasswordResetService, LoginUserService
+│   └── domain         # User Entity, PasswordResetToken
+├── 👥 group
+│   ├── api            # GroupController
+│   └── application    # GroupService, MemberService
+├── 💸 expense
+│   ├── api            # ExpenseController
+│   └── domain         # Expense, ExpenseSplit (Polymorphic inputs)
+├── ⚖️ settlement
+│   ├── application
+│   │   ├── MinimumCashFlowService.java  # 🧠 The Greedy Algorithm
+│   │   └── BalanceCalculationService.java
+│   └── domain         # Settlement Entity
+├── 🔔 notification
+│   └── event          # ExpenseAddedEvent, MemberAddedEvent
+└── 🛡️ security        # JwtAuthenticationFilter, SecurityConfig
 ```
-
-*   `com.grouppay.user`: Identity & Access Management.
-*   `com.grouppay.group`: Relationship logic.
-*   `com.grouppay.expense`: Financial transactions.
-*   `com.grouppay.settlement`: Graph algorithms for debt.
 
 ---
 
