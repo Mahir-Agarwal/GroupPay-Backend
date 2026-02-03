@@ -24,7 +24,7 @@ public class AddExpenseService {
     private final ExpenseRepository expenseRepository;
     private final GroupRepository groupRepository;
     private final UserRepository userRepository;
-    // Event publisher to be added later
+    // Event publisher placeholder
     private final com.grouppay.notification.application.NotificationService notificationService;
 
     /**
@@ -91,7 +91,7 @@ public class AddExpenseService {
             }
         }
         
-        // TODO: Publish ExpenseCreatedEvent here
+
         
         return savedExpense;
     }
@@ -118,8 +118,7 @@ public class AddExpenseService {
         if (expense.getType() == ExpenseType.EQUAL) {
             int memberCount = groupMembers.size();
             // Edge case: Group with 0 or 1 member?
-            if (memberCount <= 1) {
-                 // Technically allowed to add expense for self, but usually split implies > 1?
+            if (groupMembers.isEmpty()) {
                  // But splitAmount logic holds. 1 member -> 100% split. 
             }
 

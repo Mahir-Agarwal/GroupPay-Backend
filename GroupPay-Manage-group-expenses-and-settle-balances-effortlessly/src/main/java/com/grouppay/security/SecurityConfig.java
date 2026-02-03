@@ -35,11 +35,6 @@ public class SecurityConfig {
                         "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
             )
-/*
-            .oauth2Login(oauth2 -> oauth2
-                .successHandler(oauth2AuthenticationSuccessHandler())
-            )
-*/
             .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

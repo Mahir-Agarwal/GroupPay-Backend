@@ -60,7 +60,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 }
 
 
-//👉 This filter runs on every HTTP request
-//👉 It checks JWT token in the request
-//👉 If token is valid → user is authenticated
-//👉 If no token → request continues as unauthenticated
+

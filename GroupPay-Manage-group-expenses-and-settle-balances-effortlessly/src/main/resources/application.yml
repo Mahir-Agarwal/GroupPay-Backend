@@ -6,8 +6,14 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/grouppay}
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:9873}
+    password: ${DB_PASSWORD:change_me}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+# ... (omitting irrelevant lines for brevity if possible, but tool requires contiguous)
+
+# ... actually simpler to just replace the specific lines or blocks.
+# Let's do the JWT secret first.
+
   
   jpa:
     hibernate:
@@ -58,7 +64,7 @@ server:
 
 # ===================== JWT =====================
 jwt:
-  secret: ${JWT_SECRET:V8YFhA2xZqK3Q7nYpLZ3Y8Z0FZl5pP0yRkzP8L9R2JwAWP11910-w1-2121-1121nn23==}
+  secret: ${JWT_SECRET:change_me_to_a_secure_token}
 
 
 

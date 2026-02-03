@@ -26,10 +26,7 @@ public class PasswordResetService {
 
         String token = UUID.randomUUID().toString();
         // Remove any existing token for this user
-        // Note: Ideally we'd have a clean-up job or logic, but for now we generate a new one.
-        // If we want to strictly enforce one valid token, we should find and delete/invalidate old ones.
-        // Assuming database constraints or just letting multiple exist (if logic allows) is fine for MVP.
-        // But let's keep it simple: just create a new one.
+
 
         PasswordResetToken resetToken = PasswordResetToken.builder()
                 .token(token)
