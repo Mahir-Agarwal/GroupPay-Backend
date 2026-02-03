@@ -7,7 +7,7 @@ import urllib.parse
 import urllib.error
 import time
 
-BASE_URL = "http://10.27.247.110:8081"
+BASE_URL = "https://grouppay-8w7j.onrender.com"
 
 # --- HELPERS ---
 

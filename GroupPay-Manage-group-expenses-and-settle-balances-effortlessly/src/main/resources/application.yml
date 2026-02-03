@@ -4,9 +4,9 @@ spring:
 
   # ===================== DATABASE =====================
   datasource:
-    url: jdbc:mysql://localhost:3306/grouppay
-    username: root
-    password: 9873
+    url: ${DB_URL:jdbc:mysql://localhost:3306/grouppay}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:9873}
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   jpa:
@@ -44,8 +44,8 @@ spring:
       client:
         registration:
           google:
-            client-id: "placeholder-client-id"
-            client-secret: "placeholder-secret"
+            client-id: ${GOOGLE_CLIENT_ID:placeholder-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:placeholder-secret}
             scope: profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             authorization-grant-type: authorization_code
@@ -53,12 +53,12 @@ spring:
 
 # ===================== SERVER =====================
 server:
-  port: 8081
+  port: ${SERVER_PORT:8081}
   address: 0.0.0.0
 
 # ===================== JWT =====================
 jwt:
-  secret: V8YFhA2xZqK3Q7nYpLZ3Y8Z0FZl5pP0yRkzP8L9R2JwAWP11910-w1-2121-1121nn23==
+  secret: ${JWT_SECRET:V8YFhA2xZqK3Q7nYpLZ3Y8Z0FZl5pP0yRkzP8L9R2JwAWP11910-w1-2121-1121nn23==}
 
 
 
