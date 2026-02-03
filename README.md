@@ -31,6 +31,21 @@
 
 ---
 
+## 🚧 Project Status & Roadmap
+
+> **Current Status**: ✅ Core Backend Complete (Deployed)
+
+| Phase | Feature | Status |
+| :--- | :--- | :--- |
+| **Phase 1** | JWT Auth, Groups, Settlements | ✅ **Completed** |
+| **Phase 1** | Dockerization & Cloud Deployment | ✅ **Completed** |
+| **Phase 2** | Password Reset Flow | ✅ **Completed** |
+| **Phase 3** | WebSocket Notifications | 🚧 *In Progress* |
+| **Future** | Social Login (Google/FB) | 📅 *Planned* |
+| **Future** | Native Android App Integration | 📅 *Planned* |
+
+---
+
 ## ✨ Features
 
 <table>
@@ -124,16 +139,44 @@ Explore the API interactively. No external tools needed.
 
 | Environment | URL | Status |
 | :--- | :--- | :--- |
-| **Live Demo** | [**Launch Swagger UI 🚀**](https://grouppay-8w7j.onrender.com/swagger-ui/index.html) | 🟢 Online |
+| **Live Demo** | [**Launch Swagger UI 🚀**](https://your-app-url.onrender.com/swagger-ui/index.html) | 🟢 Online |
 | **Localhost** | [View Local Docs](http://localhost:8081/swagger-ui/index.html) | 🟡 When running |
 
-> **Key Endpoints:**
-> *   `POST /auth/register` - Onboard new users
-> *   `POST /auth/forgot-password` - Recovery flow
-> *   `POST /expenses` - The core ledger entry
-> *   `GET /settlements/group/{id}/calculate` - The settling engine
+### 🔑 Key Endpoints
+
+| Method | Endpoint | Description | Auth? |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/auth/register` | Register a new user | ❌ |
+| `POST` | `/auth/login` | Login & receive JWT | ❌ |
+| `POST` | `/auth/forgot-password` | Request password reset token | ❌ |
+| `GET` | `/groups` | List all groups for user | ✅ |
+| `POST` | `/groups` | Create a new group | ✅ |
+| `POST` | `/expenses` | Add a split expense | ✅ |
+| `GET` | `/settlements/group/{id}` | Calculate settlement graph | ✅ |
+
+### 📝 Example Request (cURL)
+
+**Register a User:**
+```bash
+curl -X POST "https://your-app-url.onrender.com/auth/register" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "mahir_dev",
+    "email": "mahir@example.com",
+    "password": "securePassword123"
+  }'
+```
 
 ---
+
+## ✅ Prerequisites
+
+Ensure you have the following installed before running locally:
+
+*   **Java 21** (JDK) ☕
+*   **MySQL 8.0** (or compatible) 🐬
+*   **Maven 3.9+** 🛠️
+*   **Docker & Docker Compose** (Optional, for containerization) 🐳
 
 ## ⚡ Getting Started
 
@@ -168,9 +211,33 @@ docker run -p 8081:8081 \
 
 ---
 
+## 🏛️ Architecture
+
+The project is built as a **Modular Monolith**, ensuring strict boundaries exist between features (User, Group, Expense) while keeping the deployment simple.
+
+### 🧩 System Design
+```mermaid
+graph TD
+    Client[Mobile/Web Client] -->|REST API| LoadBalancer
+    LoadBalancer -->|HTTPS| SpringBoot[Spring Boot Backend]
+    SpringBoot -->|Read/Write| DB[(TiDB / MySQL)]
+    
+    subgraph "Modular Monolith"
+        Auth[User Module]
+        Grp[Group Module]
+        Exp[Expense Module]
+        Set[Settlement Engine]
+    end
+    
+    SpringBoot --> Auth
+    SpringBoot --> Grp
+    SpringBoot --> Exp
+    Exp --> Set
+```
+
 ## 📂 Project Structure
 
-The project follows a **modular monolith (MM)** architecture. Each feature (User, Group, Expense) is a self-contained module with its own API, Service, and Repository layers.
+The project follows a **Domain-Driven Design (DDD)** architecture. Each feature (User, Group, Expense) is a self-contained module with its own API, Service, and Repository layers.
 
 ```bash
 com.grouppay
