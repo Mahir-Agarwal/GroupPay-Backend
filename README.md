@@ -25,13 +25,13 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 **GroupPay** is a high-performance backend system engineered to simplify complex group finances. Think of it as the engine behind a "Pro" version of Splitwise. It handles user authentication, complex expense splitting (Equal, Exact, Percentage), and features a **smart settlement algorithm** to minimize the number of transactions needed to settle up.
 
 ---
 
-## 🚧 Project Status & Roadmap
+##  Project Status & Roadmap
 
 > **Current Status**: ✅ Core Backend Complete (Deployed)
 
@@ -46,12 +46,12 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 <table>
   <tr>
     <td width="50%">
-      <h3>🔐 Robust Security</h3>
+      <h3> Robust Security</h3>
       <ul>
         <li><strong>JWT Authentication</strong>: Stateless & Scalable.</li>
         <li><strong>Password Reset Flow</strong>: Secure email-token verify loop.</li>
@@ -59,7 +59,7 @@
       </ul>
     </td>
     <td width="50%">
-      <h3>💰 Smart Financials</h3>
+      <h3> Smart Financials</h3>
       <ul>
         <li><strong>Dynamic Splitting</strong>: Handles <em>Equal</em>, <em>Exact</em> amounts, and <em>Percentages</em>.</li>
         <li><strong>Algorithm</strong>: Graph-based debt simplification.</li>
@@ -69,7 +69,7 @@
   </tr>
   <tr>
     <td width="50%">
-      <h3>👥 Group Dynamics</h3>
+      <h3> Group Dynamics</h3>
       <ul>
         <li>Deep linking for group invites.</li>
         <li>Cascading deletion for clean data management.</li>
@@ -77,7 +77,7 @@
       </ul>
     </td>
     <td width="50%">
-      <h3>⚡ Modern Tech</h3>
+      <h3> Modern Tech</h3>
       <ul>
         <li><strong>Dockerized</strong>: "Run anywhere" container.</li>
         <li><strong>Swagger UI</strong>: Interactive API playground.</li>
@@ -102,7 +102,7 @@
 
 ---
 
-## 🧠 The Algorithm: Minimum Cash Flow
+##  The Algorithm: Minimum Cash Flow
 
 GroupPay isn't just a CRUD app; it solves the NP-hard problem of **debt simplification** efficiently using a **Greedy Minimum Cash Flow Algorithm**.
 
@@ -116,7 +116,7 @@ Imagine 3 friends: **Ram**, **Sham**, and **Krishna**.
 *   Krishna gives Sham ₹50.
 *   *Sham is just a middleman moving money!*
 
-### The Solution (1 Transaction) ⚡
+### The Solution (1 Transaction) 
 Our algorithm calculates the **Net Balance** for each person:
 *   Ram: **+₹50** (He is owed)
 *   Sham: **0** (Owes 50, Owed 50 -> Net 0)
@@ -173,15 +173,15 @@ curl -X POST "https://your-app-url.onrender.com/auth/register" \
 
 Ensure you have the following installed before running locally:
 
-*   **Java 21** (JDK) ☕
-*   **MySQL 8.0** (or compatible) 🐬
-*   **Maven 3.9+** 🛠️
-*   **Docker & Docker Compose** (Optional, for containerization) 🐳
+*   **Java 21** (JDK) 
+*   **MySQL 8.0** (or compatible) 
+*   **Maven 3.9+** 
+*   **Docker & Docker Compose** (Optional, for containerization) 
 
-## ⚡ Getting Started
+##  Getting Started
 
 <details>
-<summary><strong>🏃‍♂️ Option 1: Run with Docker (Recommended)</strong></summary>
+<summary><strong> Option 1: Run with Docker (Recommended)</strong></summary>
 
 ```bash
 # 1. Build the image
@@ -197,7 +197,7 @@ docker run -p 8081:8081 \
 </details>
 
 <details>
-<summary><strong>💻 Option 2: Run from Source</strong></summary>
+<summary><strong> Option 2: Run from Source</strong></summary>
 
 1.  **Clone & Configure**:
     Update `src/main/resources/application.yml` with your DB creds.
@@ -211,11 +211,11 @@ docker run -p 8081:8081 \
 
 ---
 
-## 🏛️ Architecture
+##  Architecture
 
 The project is built as a **Modular Monolith**, ensuring strict boundaries exist between features (User, Group, Expense) while keeping the deployment simple.
 
-### 🧩 System Design
+###  System Design
 ```mermaid
 graph TD
     Client[Mobile/Web Client] -->|REST API| LoadBalancer
@@ -241,24 +241,24 @@ The project follows a **Domain-Driven Design (DDD)** architecture. Each feature 
 
 ```bash
 com.grouppay
-├── 👤 user
+├──  user
 │   ├── api            # AuthController (Login, Register, ForgotPwd)
 │   ├── application    # PasswordResetService, LoginUserService
 │   └── domain         # User Entity, PasswordResetToken
-├── 👥 group
+├──  group
 │   ├── api            # GroupController
 │   └── application    # GroupService, MemberService
-├── 💸 expense
+├──  expense
 │   ├── api            # ExpenseController
 │   └── domain         # Expense, ExpenseSplit (Polymorphic inputs)
-├── ⚖️ settlement
+├──  settlement
 │   ├── application
-│   │   ├── MinimumCashFlowService.java  # 🧠 The Greedy Algorithm
+│   │   ├── MinimumCashFlowService.java  #  The Greedy Algorithm
 │   │   └── BalanceCalculationService.java
 │   └── domain         # Settlement Entity
-├── 🔔 notification
+├──  notification
 │   └── event          # ExpenseAddedEvent, MemberAddedEvent
-└── 🛡️ security        # JwtAuthenticationFilter, SecurityConfig
+└──  security        # JwtAuthenticationFilter, SecurityConfig
 ```
 
 ---
