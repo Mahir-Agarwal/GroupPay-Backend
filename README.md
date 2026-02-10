@@ -139,7 +139,7 @@ Explore the API interactively. No external tools needed.
 
 | Environment | URL | Status |
 | :--- | :--- | :--- |
-| **Live Demo** | [**Launch Swagger UI 🚀**](https://your-app-url.onrender.com/swagger-ui/index.html) | 🟢 Online |
+| **Live Demo** | [**Launch Swagger UI 🚀**](https://grouppay-8w7j.onrender.com/swagger-ui/index.html) | 🟢 Online |
 | **Localhost** | [View Local Docs](http://localhost:8081/swagger-ui/index.html) | 🟡 When running |
 
 ### 🔑 Key Endpoints
